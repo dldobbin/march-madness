@@ -1,7 +1,6 @@
 import random
 import os
 import re
-import least_squares
 from datetime import date
 import data
 import model
@@ -125,4 +124,4 @@ class NCAA():
 
 					line = model.model(team_stats,opp_stats) + [gamearr[1]-gamearr[2]]
 					data.append(line)
-		return least_squares.adj(data).reshape(13).tolist()
+		return model.least_squares(data).reshape(13).tolist()
