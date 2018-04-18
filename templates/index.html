@@ -1,0 +1,139 @@
+{% macro school(prediction, actual) -%}
+	{% for pred, act in zip(prediction,actual) %}
+		{% if act.name == 'none' %}
+		<div class="school-container">
+			<div class="school"><div>{{ pred.seed }} {{ pred.name }}</div></div>
+		</div>
+		{% elif pred.name == act.name %}
+		<div class="school-container">
+			<div class="school correct"><div>{{ pred.seed }} {{ pred.name }}</div></div>
+		</div>
+		{% else %}
+		<div class="school-container">
+			<div class="school wrong"><div>{{ pred.seed }} {{ pred.name }}</div><div class="actual">{{ act.seed }} {{ act.name }}</div></div>
+		</div>
+		{% endif %}
+	{% endfor %}
+{%- endmacro %}
+
+<html>
+<head>
+	<title>Smarch Smadness {{ year }}</title>
+	<link rel="stylesheet" type="text/css" href={{ url_for("static", filename="index.css") }}>
+</head>
+<body>
+	<div style="left: 0; width: 50%; position: absolute;">
+			<div class="bracket">
+				<div class="round">
+					{% for school in prediction[0][0:16] %}
+					<div class="school-container">
+						<div class="school"><div>{{ school.seed }} {{ school.name }}</div></div>
+					</div>
+					{% endfor %}								
+				</div>
+				<div class="round">
+					{{ school(prediction[1][0:8], actual[1][0:8]) }}
+				</div>
+				<div class="round" style="margin-left: -10px;">
+					{{ school(prediction[2][0:4], actual[2][0:4]) }}
+				</div>
+				<div class="round" style="margin-left: -10px;">
+					{{ school(prediction[3][0:2], actual[3][0:2]) }}
+				</div>
+				<div class="round" style="margin-left: -10px;">
+					{{ school(prediction[4][0:1], actual[4][0:1]) }}
+				</div>
+			</div>
+			<div class="bracket">
+				<div class="round">
+					{% for school in prediction[0][16:32] %}
+					<div class="school-container">
+						<div class="school"><div>{{ school.seed }} {{ school.name }}</div></div>
+					</div>
+					{% endfor %}				
+				</div>
+				<div class="round">
+					{{ school(prediction[1][8:16], actual[1][8:16]) }}
+				</div>
+				<div class="round" style="margin-left: -10px;">
+					{{ school(prediction[2][4:8], actual[2][4:8]) }}
+				</div>
+				<div class="round" style="margin-left: -10px;">
+					{{ school(prediction[3][2:4], actual[3][2:4]) }}
+				</div>
+				<div class="round" style="margin-left: -10px;">
+					{{ school(prediction[4][1:2], actual[4][1:2]) }}
+				</div>
+		</div>
+	</div>
+	<div style="right: 0; width: 50%; position: absolute;">
+		<div class="bracket">
+			<div class="round" style="margin-right: -10px;">
+				{{ school(prediction[4][2:3], actual[4][2:3]) }}
+			</div>
+			<div class="round" style="margin-right: -10px;">
+				{{ school(prediction[3][4:6], actual[3][4:6]) }}
+			</div>
+			<div class="round" style="margin-right: -10px;">
+				{{ school(prediction[2][8:12], actual[2][8:12]) }}
+			</div>
+			<div class="round">
+				{{ school(prediction[1][16:24], actual[1][16:24]) }}
+			</div>
+			<div class="round">
+				{% for school in prediction[0][32:48] %}
+				<div class="school-container">
+					<div class="school"><div>{{ school.seed }} {{ school.name }}</div></div>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+		<div class="bracket">
+			<div class="round" style="margin-right: -10px;">
+				{{ school(prediction[4][3:4], actual[4][3:4]) }}
+			</div>
+			<div class="round" style="margin-right: -10px;">
+				{{ school(prediction[3][6:8], actual[3][6:8]) }}
+			</div>
+			<div class="round" style="margin-right: -10px;">
+				{{ school(prediction[2][12:16], actual[2][12:16]) }}
+			</div>
+			<div class="round">
+				{{ school(prediction[1][24:32], actual[1][24:32]) }}
+			</div>
+			<div class="round">
+				{% for school in prediction[0][48:64] %}
+				<div class="school-container">
+					<div class="school"><div>{{ school.seed }} {{ school.name }}</div></div>
+				</div>
+				{% endfor %}				
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="final">
+			{{ school(prediction[5][0:1], actual[5][0:1]) }}
+			{{ school(prediction[6][0:1], actual[6][0:1]) }}
+			{{ school(prediction[5][1:2], actual[5][1:2]) }}
+		</div>
+	</div>
+	<div class="score">{{ score }}</div>
+	<div class="controls-container">
+		<div class="controls">
+			<form>
+				<select name="year">
+					{% for o_year in range(2011,2019) %}
+					<option{% if year == o_year %} selected{% endif %}>{{ o_year }}</option>
+					{% endfor %}
+				</select>
+				<div style="display:flex;">
+					<input type="checkbox" name="chalk">
+					<label for="chalk">chalk</label>
+				</div>
+				<input type="submit">
+			</form>
+		</div>
+		<div style="width: 30px;"></div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,115 @@
+body {
+	margin: 0;
+	font-family: sans-serif;
+	text-transform: uppercase;
+}
+
+.container {
+	height: 100vh;
+	min-height: 940px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.bracket {
+	display: flex;
+	height: 48vh;
+	min-height: 450px;
+	padding: 10px 10px;
+}
+
+.round {
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+	flex-basis: 0;
+}
+
+.school-container {
+	display: flex;
+	align-items: center;
+	flex-grow: 1;
+}
+
+.school {
+	flex-grow: 1;
+	border: 1px solid grey;
+	height: 25px;
+	line-height: 25px;
+	text-align: center;
+}
+
+.correct {
+	color: #3a3;
+	background-color: #cfc;
+}
+
+.wrong {
+	color: #a33;
+	background-color: #fcc;
+}
+
+.actual {
+	font-size: 12px;
+	margin-top: -50px;
+	color: #3a3;
+}
+
+.school div {
+	overflow: hidden;
+	height: inherit;
+}
+
+.final {
+	position: absolute;
+	width: 575px;
+	height: 200px;
+	border: 1px solid grey;
+	display: flex;
+}
+
+.final .school-container {
+	align-items: top;
+}
+
+.score {
+	position: absolute;
+	top: 0;
+	width: 100%;
+	text-align: center;
+	font-size: 32px;
+}
+
+.controls-container {
+	top: 0;
+	left: 0;
+	position: fixed;
+	height: 100vh;
+	display: flex;
+}
+
+.controls-container div {
+	flex-grow: 1;
+}
+
+.controls {
+	background-color: white;
+	width: 0px;
+	overflow: hidden;
+	transition: width .5s;
+}
+
+.controls-container:hover .controls {
+	width: 120px;
+}
+
+.controls select {
+	margin: 5px;
+	width: calc(100% - 10px);
+}
+
+.controls input[type=submit] {
+	margin: 5px;
+	width: calc(100% - 10px);
+}
