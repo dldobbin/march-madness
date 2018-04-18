@@ -3,7 +3,7 @@ import os
 import re
 import least_squares
 from datetime import date
-import results
+import data
 import model
 
 def sign(a):
@@ -21,7 +21,7 @@ class NCAA():
 	"""docstring for NCAA"""
 	def __init__(self, year=date.today().year):
 		self.year = str(year)
-		self.results = [map(lambda x: Team(x[0],x[1]), round) for round in results.results[self.year]]
+		self.results = [map(lambda x: Team(x[0],x[1]), round) for round in data.results[self.year]]
 		self.adj_factor = self.get_adjustment_factor()
 		if not os.path.exists('data/y'+self.year):
 			os.makedirs('data/y'+self.year)
